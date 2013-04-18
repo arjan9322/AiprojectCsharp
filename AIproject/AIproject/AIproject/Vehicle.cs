@@ -14,6 +14,8 @@ namespace AIproject
         static public int TileWidth = 48;
         static public int TileHeight = 48;
 
+       
+
         public Vehicle(Vector2 startingPos)
         {
             pos = startingPos;

@@ -17,12 +17,18 @@ namespace AIproject
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
+        Vector2 cannonOrigin = new Vector2(24,24);
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SpriteBatch spriteCar;
+        float circle = MathHelper.Pi * 2;
 
         TileMap myMap = new TileMap();
         int squaresAcross = 18;
         int squaresDown = 11;
+
+        float RotationAngle;
+        Vector2 screenpos;
 
         public Game1()
         {
@@ -39,6 +45,10 @@ namespace AIproject
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            screenpos.X = 50;
+            screenpos.Y = 50;
+            RotationAngle = 0;
+            RotationAngle = RotationAngle % circle;
 
             base.Initialize();
         }
@@ -47,14 +57,16 @@ namespace AIproject
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
         /// </summary>
+       
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteCar   = new SpriteBatch(GraphicsDevice);
             Tile.TileSetTexture = Content.Load<Texture2D>("part2_tileset");
             Vehicle.CarTexture = Content.Load<Texture2D>("part2_tileset");
             // TODO: use this.Content to load your game content here
-        }
+         }
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -68,6 +80,7 @@ namespace AIproject
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
+      
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
@@ -79,26 +92,34 @@ namespace AIproject
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Left))
             {
-                Camera.Location.X = MathHelper.Clamp(Camera.Location.X - 2, 0, (myMap.MapWidth - squaresAcross) * Tile.TileWidth);
+                /*Camera.Location.X = MathHelper.Clamp(Camera.Location.X - 2, 0, (myMap.MapWidth - squaresAcross) * Tile.TileWidth);*/
+               
+                RotationAngle += 100;
             }
 
             if (ks.IsKeyDown(Keys.Right))
             {
-                Camera.Location.X = MathHelper.Clamp(Camera.Location.X + 2, 0, (myMap.MapWidth - squaresAcross) * Tile.TileWidth);
+                /*Camera.Location.X = MathHelper.Clamp(Camera.Location.X + 2, 0, (myMap.MapWidth - squaresAcross) * Tile.TileWidth);*/
+                RotationAngle -= 100;
             }
 
             if (ks.IsKeyDown(Keys.Up))
             {
-                Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y - 2, 0, (myMap.MapHeight - squaresDown) * Tile.TileHeight);
+                screenpos.Y -= 10;
+                /*Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y - 2, 0, (myMap.MapHeight - squaresDown) * Tile.TileHeight);*/
             }
 
             if (ks.IsKeyDown(Keys.Down))
             {
-                Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y + 2, 0, (myMap.MapHeight - squaresDown) * Tile.TileHeight);
+                screenpos.Y += 10;
+                /*Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y + 2, 0, (myMap.MapHeight - squaresDown) * Tile.TileHeight);*/
             }
+            
+            
+            RotationAngle = RotationAngle % circle;
 
             // TODO: Add your update logic here
-
+            
             base.Update(gameTime);
         }
 
@@ -126,19 +147,17 @@ namespace AIproject
                 {
                     foreach (int tileID in myMap.Rows[y + firstY].Columns[x + firstX].BaseTiles)
                     {
-                        spriteBatch.Draw(
-                            Tile.TileSetTexture,
-                            new Rectangle(
-                                (x * Tile.TileWidth) - offsetX, (y * Tile.TileHeight) - offsetY,
-                                Tile.TileWidth, Tile.TileHeight),
-                            Tile.GetSourceRectangle(tileID),
-                            Color.White);
+                        spriteBatch.Draw(Tile.TileSetTexture,new Rectangle((x * Tile.TileWidth) - offsetX, (y * Tile.TileHeight) - offsetY, Tile.TileWidth, Tile.TileHeight), Tile.GetSourceRectangle(tileID),Color.White);
                     }
                 }
             }
+          
 
             spriteBatch.End();
-
+            
+            spriteCar.Begin();             
+            spriteCar.Draw(Vehicle.CarTexture, screenpos, Tile.GetSourceRectangle(7), Color.White, RotationAngle, cannonOrigin, 1.0f, SpriteEffects.None, 0f);
+            spriteCar.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
