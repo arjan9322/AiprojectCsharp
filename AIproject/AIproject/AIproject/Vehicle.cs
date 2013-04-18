@@ -9,7 +9,7 @@ namespace AIproject
     {
         public Vehicle(Vector2 startingPos)
         {
-            Pos = startingPos;
+            //Pos = startingPos;
             Velocity = new Vector2();
         }
         public override void Render()

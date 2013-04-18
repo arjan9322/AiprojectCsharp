@@ -6,8 +6,10 @@ using Microsoft.Xna.Framework;
 
 namespace AIproject
 {
-    class BaseGameEntity
+    abstract class BaseGameEntity
     {
+        public abstract void Update(double time_elapsed);
+        public abstract void Render();
         public int ID { get; set; }
         public Vector2 pos { get; set; }
         public float scale { get; set; }
