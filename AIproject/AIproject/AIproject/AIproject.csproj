@@ -112,6 +112,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Tile and board\Camera.cs" />
+    <Compile Include="Tile and board\MapCell.cs" />
+    <Compile Include="Tile and board\Tile.cs" />
+    <Compile Include="Tile and board\TileMap.cs" />
     <Compile Include="Vehicle.cs" />
   </ItemGroup>
   <ItemGroup>

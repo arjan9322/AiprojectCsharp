@@ -6,17 +6,14 @@ using Microsoft.Xna.Framework;
 
 namespace AIproject
 {
-    abstract class MovingEntity : BaseGameEntity
+    class MovingEntity : BaseGameEntity
     {
-        public abstract override void Update(double time_elapsed);
-        public abstract override void Render();
 
-        public Vector2 Velocity { get; set; }
-        public Vector2 Heading { get; set; }
-        public float Mass { get; set; }
-        public float MaxSpeed { get; set; }
-        public float MaxForce { get; set; }
-        public float MaxTurnRate { get; set; }
-
+        public Vector2 velocity { get; set; }
+        public Vector2 heading { get; set; }
+        public float mass { get; set; }
+        public float maxSpeed { get; set; }
+        public float maxForce { get; set; }
+        public float maxTurnRate { get; set; }
     }
 }
