@@ -17,8 +17,10 @@ namespace AIproject
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-
+        GameWorld world = GameWorld.GetInstance();
+        
         int speed = 2;
+        Vehicle playerVehicle = new Vehicle(new Vector2(5f,5f));
 
         Vector2 cannonOrigin = new Vector2(24,36);
         GraphicsDeviceManager graphics;
@@ -89,11 +91,12 @@ namespace AIproject
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
 
             KeyboardState ks = Keyboard.GetState();
+            //exit game by pressing the escape button
+            if (ks.IsKeyDown(Keys.Escape))
+                this.Exit();
+
             if (ks.IsKeyDown(Keys.Left))
             {
                 /*Camera.Location.X = MathHelper.Clamp(Camera.Location.X - 2, 0, (myMap.MapWidth - squaresAcross) * Tile.TileWidth);*/
@@ -172,6 +175,7 @@ namespace AIproject
           
 
             spriteBatch.End();
+
             
             spriteCar.Begin();             
             spriteCar.Draw(Vehicle.CarTexture, screenpos, Tile.GetSourceRectangle(7), Color.White, RotationAngle2, cannonOrigin, 1.0f, SpriteEffects.None, 0f);

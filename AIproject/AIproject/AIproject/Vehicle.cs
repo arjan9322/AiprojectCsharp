@@ -23,7 +23,10 @@ namespace AIproject
         }
         public override void Render()
         {
-            throw new NotImplementedException();
+            /*spriteCar.Begin();
+            spriteCar.Draw(Vehicle.CarTexture, pos, Tile.GetSourceRectangle(7), Color.White, RotationAngle2, cannonOrigin, 1.0f, SpriteEffects.None, 0f);
+            spriteCar.End();
+            throw new NotImplementedException();*/
         }
         public override void Update(double time_elapsed)
         {
