@@ -19,8 +19,6 @@ namespace AIproject
     {
         GameWorld world = GameWorld.GetInstance();
         
-
-
         
         int speed = 2;
         Vehicle playerVehicle = new Vehicle(new Vector2(5f,5f));
@@ -43,7 +41,6 @@ namespace AIproject
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            world.AddGameEntity(new Vehicle(new Vector2(20f, 20f)));
             
         }
 
@@ -146,6 +143,8 @@ namespace AIproject
 
             // TODO: Add your update logic here
             
+            world.Update(0.1f);
+            ((Vehicle)world.gameobjects[0]).steeringBehaviour.SetTarget(screenpos);
             base.Update(gameTime);
         }
 
@@ -184,9 +183,10 @@ namespace AIproject
             
             spriteCar.Begin();             
             spriteCar.Draw(Vehicle.CarTexture, screenpos, Tile.GetSourceRectangle(7), Color.White, RotationAngle2, cannonOrigin, 1.0f, SpriteEffects.None, 0f);
+            spriteCar.Draw(Vehicle.CarTexture, world.gameobjects[0].pos,Tile.GetSourceRectangle(7),Color.White, RotationAngle2, cannonOrigin, 1.0f, SpriteEffects.None, 0f);
             spriteCar.End();
             // TODO: Add your drawing code here
-
+            world.Render();
             base.Draw(gameTime);
         }
     }

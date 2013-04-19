@@ -8,13 +8,14 @@ namespace AIproject
 {
     static class VectorHelper
     {
-        public static void ToLimit(Vector2 vector, float limit)
+        public static Vector2 ToLimit(Vector2 vector, float limit)
         {
             if (vector.Length() > limit)
             {
                 float factor = vector.Length() / limit;
                 vector = vector / factor;
             }
+            return vector;
         }
     }
 }

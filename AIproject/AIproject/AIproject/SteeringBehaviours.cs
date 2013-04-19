@@ -11,7 +11,7 @@ namespace AIproject
         bool SeekBehaviour;
         bool FleeBehaviour;
         bool ArriveBehaviour;
-        Vector2 Target;
+        public Vector2 Target;
 
         Vehicle parent;
         public SteeringBehaviours(Vehicle parent)
@@ -53,7 +53,7 @@ namespace AIproject
             if (ArriveBehaviour == true)
                 steeringForce += Arrive();
 
-            VectorHelper.ToLimit(steeringForce, parent.MaxForce);
+            steeringForce = VectorHelper.ToLimit(steeringForce, parent.MaxForce);
             return steeringForce;
         }
 
@@ -74,7 +74,7 @@ namespace AIproject
 
         public void SetTarget(Vector2 target)
         {
-
+            Target = target;
         }
 
         public void SetTargetAgent1(Vehicle agent1)

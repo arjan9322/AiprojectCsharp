@@ -14,18 +14,26 @@ namespace AIproject
         static public int TileWidth = 48;
         static public int TileHeight = 48;
         public SteeringBehaviours steeringBehaviour;
-       
+        //GameWorld world;
 
         public Vehicle(Vector2 startingPos)
         {
             pos = startingPos;
             Velocity = new Vector2();
             steeringBehaviour = new SteeringBehaviours(this);
-
+            //world = GameWorld.GetInstance();
         }
 
         public override void Render()
         {
+//             VertexPositionColor[] vertex = new VertexPositionColor[4];
+//             vertex[0] = new VertexPositionColor(new Vector3(pos.X-5,pos.Y-5, 0), Color.Red);
+//             vertex[1] = new VertexPositionColor(new Vector3(pos.X+5,pos.Y+5, 0), Color.Red);
+//             vertex[2] = new VertexPositionColor(new Vector3(pos.X - 5, pos.Y + 5, 0), Color.Red);
+//             vertex[3] = new VertexPositionColor(new Vector3(pos.X + 5, pos.Y - 5, 0), Color.Red);
+
+            
+
             /*spriteCar.Begin();
             spriteCar.Draw(Vehicle.CarTexture, pos, Tile.GetSourceRectangle(7), Color.White, RotationAngle2, cannonOrigin, 1.0f, SpriteEffects.None, 0f);
             spriteCar.End();*/
@@ -37,23 +45,14 @@ namespace AIproject
 
             Vector2 acceleration = steeringForce / Mass;
 
-            Velocity = acceleration * time_elapsed;
+            Velocity += acceleration * time_elapsed;
 
-            VectorHelper.ToLimit(Velocity, MaxSpeed);
+            Velocity = VectorHelper.ToLimit(Velocity, MaxSpeed);
 
             pos += Velocity * time_elapsed;
 
             //do update heading here
 
-        }
-
-        private void VelocityWithinLimit()
-        {
-            if (Velocity.Length() > MaxSpeed)
-            {
-                float factor = Velocity.Length() / MaxSpeed;
-                Velocity = Velocity / factor;
-            }
         }
     }
 }

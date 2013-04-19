@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
+
 
 namespace AIproject
 {
@@ -9,10 +11,20 @@ namespace AIproject
     {
         private static GameWorld instance;
         public List<BaseGameEntity> gameobjects;
-
+        
         private GameWorld()
         {
             gameobjects = new List<BaseGameEntity>();
+            //*TEST* 1 vehicle
+            Vehicle vehicle = new Vehicle(new Vector2(20f, 20f));
+            vehicle.steeringBehaviour.SeekOn();
+            vehicle.steeringBehaviour.SetTarget(new Vector2(400f, 300f));
+            vehicle.Mass = 2;
+            vehicle.MaxForce = 200;
+            vehicle.MaxSpeed = 15;
+
+            gameobjects.Add(vehicle);
+
         }
 
         public static GameWorld GetInstance()
