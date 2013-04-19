@@ -118,6 +118,7 @@
     <Compile Include="Tile and board\MapCell.cs" />
     <Compile Include="Tile and board\Tile.cs" />
     <Compile Include="Tile and board\TileMap.cs" />
+    <Compile Include="VectorHelper.cs" />
     <Compile Include="Vehicle.cs" />
   </ItemGroup>
   <ItemGroup>

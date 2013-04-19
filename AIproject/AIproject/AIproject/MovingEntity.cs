@@ -8,7 +8,7 @@ namespace AIproject
 {
     abstract class MovingEntity : BaseGameEntity
     {
-        public abstract override void Update(double time_elapsed);
+        public abstract override void Update(float time_elapsed);
         public abstract override void Render();
 
         public Vector2 Velocity { get; set; }

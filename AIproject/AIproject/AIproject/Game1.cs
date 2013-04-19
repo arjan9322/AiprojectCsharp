@@ -19,6 +19,9 @@ namespace AIproject
     {
         GameWorld world = GameWorld.GetInstance();
         
+
+
+        
         int speed = 2;
         Vehicle playerVehicle = new Vehicle(new Vector2(5f,5f));
 
@@ -40,6 +43,8 @@ namespace AIproject
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            world.AddGameEntity(new Vehicle(new Vector2(20f, 20f)));
+            
         }
 
         /// <summary>

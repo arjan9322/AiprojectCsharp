@@ -11,17 +11,23 @@ namespace AIproject
         bool SeekBehaviour;
         bool FleeBehaviour;
         bool ArriveBehaviour;
+        Vector2 Target;
 
-        SteeringBehaviours()
+        Vehicle parent;
+        public SteeringBehaviours(Vehicle parent)
         {
             SeekBehaviour = false;
             FleeBehaviour = false;
             ArriveBehaviour = false;
+            this.parent = parent;
         }
 
         private Vector2 Seek()
         {
-            return new Vector2();
+            Vector2 seekForce = new Vector2();
+            seekForce = Target - parent.pos;
+            
+            return seekForce;
         }
 
         private Vector2 Flee()
@@ -47,6 +53,7 @@ namespace AIproject
             if (ArriveBehaviour == true)
                 steeringForce += Arrive();
 
+            VectorHelper.ToLimit(steeringForce, parent.MaxForce);
             return steeringForce;
         }
 

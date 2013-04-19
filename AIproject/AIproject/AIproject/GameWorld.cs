@@ -8,7 +8,7 @@ namespace AIproject
     class GameWorld
     {
         private static GameWorld instance;
-        List<BaseGameEntity> gameobjects;
+        public List<BaseGameEntity> gameobjects;
 
         private GameWorld()
         {
@@ -22,7 +22,7 @@ namespace AIproject
             return instance;
         }
 
-        public void Update(double time_elapsed)
+        public void Update(float time_elapsed)
         {
             foreach (BaseGameEntity entity in gameobjects)
             {
