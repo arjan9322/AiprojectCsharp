@@ -17,6 +17,6 @@ namespace AIproject
         public float MaxSpeed { get; set; }
         public float MaxForce { get; set; }
         public float MaxTurnRate { get; set; }
-
+ 
     }
 }

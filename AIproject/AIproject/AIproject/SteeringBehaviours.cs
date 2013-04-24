@@ -32,7 +32,8 @@ namespace AIproject
 
         private Vector2 Flee()
         {
-            return new Vector2();
+
+           
         }
 
         private Vector2 Arrive()

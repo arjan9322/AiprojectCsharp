@@ -10,11 +10,24 @@ namespace AIproject
     class Vehicle : MovingEntity
     {
         static public Texture2D CarTexture;
+        static public Vector2 steeringForce;
 
-        static public int TileWidth = 48;
-        static public int TileHeight = 48;
+        static public int TileWidth = 20;
+        static public int TileHeight = 20;
+        static public int SpriteWidth = 48;
+        static public int SpriteHeight = 48;
         public SteeringBehaviours steeringBehaviour;
+
         //GameWorld world;
+  
+        static public Rectangle GetSourceRectangle(int tileIndex)
+        {
+            int tileY = tileIndex / (CarTexture.Width / TileWidth);
+            int tileX = tileIndex % (CarTexture.Width / TileWidth);
+
+            return new Rectangle(tileX * SpriteWidth, tileY * SpriteHeight, TileWidth, TileHeight);
+        }
+
 
         public Vehicle(Vector2 startingPos)
         {
@@ -26,33 +39,24 @@ namespace AIproject
 
         public override void Render()
         {
-//             VertexPositionColor[] vertex = new VertexPositionColor[4];
-//             vertex[0] = new VertexPositionColor(new Vector3(pos.X-5,pos.Y-5, 0), Color.Red);
-//             vertex[1] = new VertexPositionColor(new Vector3(pos.X+5,pos.Y+5, 0), Color.Red);
-//             vertex[2] = new VertexPositionColor(new Vector3(pos.X - 5, pos.Y + 5, 0), Color.Red);
-//             vertex[3] = new VertexPositionColor(new Vector3(pos.X + 5, pos.Y - 5, 0), Color.Red);
-
             
-
-            /*spriteCar.Begin();
-            spriteCar.Draw(Vehicle.CarTexture, pos, Tile.GetSourceRectangle(7), Color.White, RotationAngle2, cannonOrigin, 1.0f, SpriteEffects.None, 0f);
-            spriteCar.End();*/
         }
         public override void Update(float time_elapsed)
         {
             // create steering force dependent on steeringbehaviours
-            Vector2 steeringForce = steeringBehaviour.Calculate();
-
+            steeringForce = steeringBehaviour.Calculate();
+            rotation = steeringForce;
             Vector2 acceleration = steeringForce / Mass;
 
             Velocity += acceleration * time_elapsed;
 
             Velocity = VectorHelper.ToLimit(Velocity, MaxSpeed);
-
-            pos += Velocity * time_elapsed;
+            rotation = Velocity * time_elapsed;
+            pos += rotation;
 
             //do update heading here
 
         }
+
     }
 }

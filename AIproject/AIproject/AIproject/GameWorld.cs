@@ -16,14 +16,19 @@ namespace AIproject
         {
             gameobjects = new List<BaseGameEntity>();
             //*TEST* 1 vehicle
-            Vehicle vehicle = new Vehicle(new Vector2(20f, 20f));
+            Random rnd = new Random();
+
+            for (int i = 0; i < 10; i++)
+            {
+
+            Vehicle vehicle = new Vehicle(new Vector2(rnd.Next(20, 80), rnd.Next(20, 80)));
             vehicle.steeringBehaviour.SeekOn();
             vehicle.steeringBehaviour.SetTarget(new Vector2(400f, 300f));
             vehicle.Mass = 2;
             vehicle.MaxForce = 200;
             vehicle.MaxSpeed = 15;
-
             gameobjects.Add(vehicle);
+            }
 
         }
 
@@ -50,6 +55,7 @@ namespace AIproject
             }
         }
 
+       
         public void AddGameEntity(BaseGameEntity entity)
         {
             gameobjects.Add(entity);

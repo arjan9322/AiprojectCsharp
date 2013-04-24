@@ -23,7 +23,7 @@ namespace AIproject
         int speed = 2;
         Vehicle playerVehicle = new Vehicle(new Vector2(5f,5f));
 
-        Vector2 cannonOrigin = new Vector2(24,36);
+        Vector2 cannonOrigin = new Vector2(5,5);
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteBatch spriteCar;
@@ -55,7 +55,7 @@ namespace AIproject
             // TODO: Add your initialization logic here
             screenpos.X = 50;
             screenpos.Y = 50;
-            RotationAngle = 90;
+            RotationAngle = 0;
             RotationAngle2 = RotationAngle / 180;
             RotationAngle2 = RotationAngle2 * circle;
             base.Initialize();
@@ -114,27 +114,26 @@ namespace AIproject
 
             if (ks.IsKeyDown(Keys.Up))
             {
-                //fix
                 double RotationAngle3 ;
-                RotationAngle3 = (RotationAngle + 90) / 180;
-                RotationAngle3 = RotationAngle3 * circle;
-                double x = Math.Cos(RotationAngle3);
-                double y = Math.Sin(RotationAngle3);
-                screenpos.Y -= (float)(y * speed);
-                screenpos.X -= (float)(x * speed);
-                /*Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y - 2, 0, (myMap.MapHeight - squaresDown) * Tile.TileHeight);*/
-            }
-
-            if (ks.IsKeyDown(Keys.Down))
-            {
-                double RotationAngle3;
-                RotationAngle3 = (RotationAngle + 90) / 180;
+                RotationAngle3 = (RotationAngle) / 180;
                 RotationAngle3 = RotationAngle3 * circle;
                 double x = Math.Cos(RotationAngle3);
                 double y = Math.Sin(RotationAngle3);
                 screenpos.Y += (float)(y * speed);
                 screenpos.X += (float)(x * speed);
-                /*Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y + 2, 0, (myMap.MapHeight - squaresDown) * Tile.TileHeight);*/
+               
+            }
+
+            if (ks.IsKeyDown(Keys.Down))
+            {
+                double RotationAngle3;
+                RotationAngle3 = (RotationAngle) / 180;
+                RotationAngle3 = RotationAngle3 * circle;
+                double x = Math.Cos(RotationAngle3);
+                double y = Math.Sin(RotationAngle3);
+                screenpos.Y -= (float)(y * speed);
+                screenpos.X -= (float)(x * speed);
+                
             }
 
 
@@ -144,7 +143,10 @@ namespace AIproject
             // TODO: Add your update logic here
             
             world.Update(0.1f);
-            ((Vehicle)world.gameobjects[0]).steeringBehaviour.SetTarget(screenpos);
+            for (int i = 0; i < 10; i++)
+            {
+                ((Vehicle)world.gameobjects[i]).steeringBehaviour.SetTarget(screenpos);
+            }
             base.Update(gameTime);
         }
 
@@ -181,9 +183,14 @@ namespace AIproject
             spriteBatch.End();
 
             
-            spriteCar.Begin();             
-            spriteCar.Draw(Vehicle.CarTexture, screenpos, Tile.GetSourceRectangle(7), Color.White, RotationAngle2, cannonOrigin, 1.0f, SpriteEffects.None, 0f);
-            spriteCar.Draw(Vehicle.CarTexture, world.gameobjects[0].pos,Tile.GetSourceRectangle(7),Color.White, RotationAngle2, cannonOrigin, 1.0f, SpriteEffects.None, 0f);
+            spriteCar.Begin();
+            spriteCar.Draw(Vehicle.CarTexture, screenpos, Vehicle.GetSourceRectangle(7), Color.White, RotationAngle2, cannonOrigin, 1.0f, SpriteEffects.None, 0f);
+
+            for (int i = 0; i < 10; i++)
+            {
+                float angle = (float)Math.Atan2(world.gameobjects[i].rotation.Y, world.gameobjects[i].rotation.X);
+                spriteCar.Draw(Vehicle.CarTexture, world.gameobjects[i].pos, Vehicle.GetSourceRectangle(7), Color.White, angle, cannonOrigin, 1.0f, SpriteEffects.None, 0f);
+            }
             spriteCar.End();
             // TODO: Add your drawing code here
             world.Render();

@@ -12,6 +12,7 @@ namespace AIproject
         public abstract void Render();
         public int ID { get; set; }
         public Vector2 pos { get; set; }
+        public Vector2 rotation { get; set; }
         public float scale { get; set; }
         public float Bradius { get; set; }
     }
