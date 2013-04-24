@@ -100,13 +100,11 @@ namespace AIproject
                
                 RotationAngle -= (1 * speed);
             }
-
             if (ks.IsKeyDown(Keys.Right))
             {
                 /*Camera.Location.X = MathHelper.Clamp(Camera.Location.X + 2, 0, (myMap.MapWidth - squaresAcross) * Tile.TileWidth);*/
                 RotationAngle += (1 * speed);
             }
-
             if (ks.IsKeyDown(Keys.Up))
             {
                 //fix
@@ -130,9 +128,7 @@ namespace AIproject
                 screenpos.Y += (float)(y * speed);
                 screenpos.X += (float)(x * speed);
                 /*Camera.Location.Y = MathHelper.Clamp(Camera.Location.Y + 2, 0, (myMap.MapHeight - squaresDown) * Tile.TileHeight);*/
-            }
-
-
+            }            
             RotationAngle2 = RotationAngle / 180;
             RotationAngle2 = RotationAngle2 * circle;
 
