@@ -15,5 +15,6 @@ namespace AIproject
         public Vector2 rotation { get; set; }
         public float scale { get; set; }
         public float Bradius { get; set; }
+        
     }
 }

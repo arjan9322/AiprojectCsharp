@@ -22,7 +22,7 @@ namespace AIproject
             {
 
             Vehicle vehicle = new Vehicle(new Vector2(rnd.Next(20, 80), rnd.Next(20, 80)));
-            vehicle.steeringBehaviour.SeekOn();
+            vehicle.steeringBehaviour.ArriveOn();
             vehicle.steeringBehaviour.SetTarget(new Vector2(400f, 300f));
             vehicle.Mass = 2;
             vehicle.MaxForce = 200;

@@ -6,8 +6,10 @@ using Microsoft.Xna.Framework;
 
 namespace AIproject
 {
+    enum Dec{ slow = 3, normal = 2, fast = 1 };
     class SteeringBehaviours
     {
+        
         bool SeekBehaviour;
         bool FleeBehaviour;
         bool ArriveBehaviour;
@@ -32,13 +34,24 @@ namespace AIproject
 
         private Vector2 Flee()
         {
-
+            return new Vector2();
            
         }
 
-        private Vector2 Arrive()
+        private Vector2 Arrive(Dec declaration)
         {
-            return new Vector2();
+            Vector2 ToTarget = new Vector2();
+            ToTarget = Target - parent.pos;
+            double dist = ToTarget.Length();
+
+            if (dist > 0)
+            {
+                const double declarationtweak = 0.3;
+                double speed = dist / ((double)declaration * declarationtweak);
+                return ToTarget;
+
+            }
+            return new Vector2(0f, 0f);
         }
 
         public Vector2 Calculate()
@@ -52,7 +65,7 @@ namespace AIproject
                 steeringForce += Flee();
 
             if (ArriveBehaviour == true)
-                steeringForce += Arrive();
+               // steeringForce += Arrive();
 
             steeringForce = VectorHelper.ToLimit(steeringForce, parent.MaxForce);
             return steeringForce;
