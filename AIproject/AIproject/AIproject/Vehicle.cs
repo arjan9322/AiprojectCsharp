@@ -9,6 +9,7 @@ namespace AIproject
 {
     class Vehicle : MovingEntity
     {
+        
         static public Texture2D CarTexture;
         static public Vector2 steeringForce;
 
