@@ -28,11 +28,11 @@ namespace AIproject
         {
             Vector2 DesiredSpeed = new Vector2();
             DesiredSpeed = Target - parent.pos;
-            VectorHelper.ToLimit(DesiredSpeed, parent.MaxSpeed);
+            DesiredSpeed = VectorHelper.ToLimit(DesiredSpeed, parent.MaxSpeed);
             
             Vector2 seekForce = new Vector2();
             seekForce = DesiredSpeed - parent.Velocity;
-            VectorHelper.ToLimit(seekForce, parent.MaxForce);
+            seekForce = VectorHelper.ToLimit(seekForce, parent.MaxForce);
 
             return seekForce;
         }
@@ -43,17 +43,23 @@ namespace AIproject
 
         }
 
-        private Vector2 Arrive(Dec declaration)
+        private Vector2 Arrive()
         {
-            Vector2 ToTarget = new Vector2();
-            ToTarget = Target - parent.pos;
-            double dist = ToTarget.Length();
+            Vector2 ToTarget = Target - parent.pos;
+            
+            float dist = ToTarget.Length();
 
-            if (dist > 0)
+            if (dist > 0.01)
             {
-                const double declarationtweak = 0.3;
-                double speed = dist / ((double)declaration * declarationtweak);
-                return ToTarget;
+                const float declarationtweak = 8f;
+                float speed = dist /( declarationtweak);
+                
+                if (speed > parent.MaxSpeed)
+                    speed = parent.MaxSpeed;
+
+                Vector2 Dersiredvelocity = ToTarget * speed / dist;
+
+                return (Dersiredvelocity - parent.Velocity);
 
             }
             return new Vector2(0f, 0f);
@@ -70,9 +76,9 @@ namespace AIproject
                 steeringForce += Flee();
 
             if (ArriveBehaviour == true)
-               // steeringForce += Arrive();
+                steeringForce += Arrive();
 
-            steeringForce = VectorHelper.ToLimit(steeringForce, parent.MaxForce);
+            steeringForce = VectorHelper.MaxLimit(steeringForce, parent.MaxForce);
             return steeringForce;
         }
 

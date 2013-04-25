@@ -51,9 +51,10 @@ namespace AIproject
 
             Velocity += acceleration * time_elapsed;
 
-            Velocity = VectorHelper.ToLimit(Velocity, MaxSpeed);
-            rotation = Velocity * time_elapsed;
-            pos += rotation;
+            Velocity = VectorHelper.MaxLimit(Velocity, MaxSpeed);
+            if (Velocity.Length() > 0.001) 
+                rotation = Velocity * time_elapsed;
+            pos += Velocity * time_elapsed;
 
             //do update heading here
 
