@@ -141,11 +141,15 @@ namespace AIproject
             RotationAngle2 = RotationAngle2 * circle;
 
             // TODO: Add your update logic here
-            
+
             world.Update(0.1f);
-            for (int i = 0; i < 10; i++)
+            if (ks.IsKeyDown(Keys.Enter))
+                ((Vehicle)world.gameobjects[0]).steeringBehaviour.SetTarget(world.gameobjects[9].pos);
+            else
+                ((Vehicle)world.gameobjects[0]).steeringBehaviour.SetTarget(screenpos);
+            for (int i = 1; i < 10; i++)
             {
-                ((Vehicle)world.gameobjects[i]).steeringBehaviour.SetTarget(screenpos);
+                ((Vehicle)world.gameobjects[i]).steeringBehaviour.SetTarget(world.gameobjects[i-1].pos);
             }
             base.Update(gameTime);
         }
