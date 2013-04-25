@@ -26,11 +26,11 @@ namespace AIproject
         {
             Vector2 DesiredSpeed = new Vector2();
             DesiredSpeed = Target - parent.pos;
-            VectorHelper.ToLimit(DesiredSpeed, parent.MaxSpeed);
+            DesiredSpeed = VectorHelper.ToLimit(DesiredSpeed, parent.MaxSpeed);
             
             Vector2 seekForce = new Vector2();
             seekForce = DesiredSpeed - parent.Velocity;
-            VectorHelper.ToLimit(seekForce, parent.MaxForce);
+            seekForce = VectorHelper.ToLimit(seekForce, parent.MaxForce);
 
             return seekForce;
         }
@@ -58,7 +58,7 @@ namespace AIproject
             if (ArriveBehaviour == true)
                 steeringForce += Arrive();
 
-            steeringForce = VectorHelper.ToLimit(steeringForce, parent.MaxForce);
+            steeringForce = VectorHelper.MaxLimit(steeringForce, parent.MaxForce);
             return steeringForce;
         }
 

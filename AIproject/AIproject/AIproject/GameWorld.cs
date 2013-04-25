@@ -25,8 +25,8 @@ namespace AIproject
             vehicle.steeringBehaviour.SeekOn();
             vehicle.steeringBehaviour.SetTarget(new Vector2(400f, 300f));
             vehicle.Mass = 2;
-            vehicle.MaxForce = 200;
-            vehicle.MaxSpeed = 15;
+            vehicle.MaxForce = 3;
+            vehicle.MaxSpeed = 10;
             gameobjects.Add(vehicle);
             }
 
