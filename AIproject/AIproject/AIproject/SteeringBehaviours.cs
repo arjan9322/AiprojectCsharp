@@ -26,16 +26,21 @@ namespace AIproject
 
         private Vector2 Seek()
         {
-            Vector2 seekForce = new Vector2();
-            seekForce = Target - parent.pos;
+            Vector2 DesiredSpeed = new Vector2();
+            DesiredSpeed = Target - parent.pos;
+            VectorHelper.ToLimit(DesiredSpeed, parent.MaxSpeed);
             
+            Vector2 seekForce = new Vector2();
+            seekForce = DesiredSpeed - parent.Velocity;
+            VectorHelper.ToLimit(seekForce, parent.MaxForce);
+
             return seekForce;
         }
 
         private Vector2 Flee()
         {
             return new Vector2();
-           
+
         }
 
         private Vector2 Arrive(Dec declaration)
