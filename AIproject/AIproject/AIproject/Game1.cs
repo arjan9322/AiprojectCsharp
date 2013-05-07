@@ -30,8 +30,8 @@ namespace AIproject
         float circle = MathHelper.Pi;
 
         TileMap myMap = new TileMap();
-        int squaresAcross = 18;
-        int squaresDown = 11;
+        int squaresAcross = 30;
+        int squaresDown = 20;
 
         float RotationAngle;
         float RotationAngle2;
@@ -40,6 +40,9 @@ namespace AIproject
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferHeight = 650;
+            graphics.PreferredBackBufferWidth = 1300;
+            graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             
         }

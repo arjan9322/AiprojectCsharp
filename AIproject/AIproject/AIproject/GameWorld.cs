@@ -5,7 +5,6 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-
 namespace AIproject
 {
     class GameWorld
@@ -17,7 +16,6 @@ namespace AIproject
         private GameWorld()
         {
             gameobjects = new List<BaseGameEntity>();
-            //*TEST* 1 vehicle
             Random rnd = new Random();
 
             for (int i = 0; i < 10; i++)
@@ -28,7 +26,7 @@ namespace AIproject
             vehicle.steeringBehaviour.SetTarget(new Vector2(400f, 300f));
             vehicle.Mass = 2;
             vehicle.MaxForce = 5;
-            vehicle.MaxSpeed = 10;
+            vehicle.MaxSpeed = 20;
             gameobjects.Add(vehicle);
             }
 
