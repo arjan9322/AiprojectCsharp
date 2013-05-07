@@ -39,7 +39,29 @@ namespace AIproject
 
         private Vector2 Flee()
         {
-            return new Vector2();
+            Vector2 ToTarget = Target - parent.pos;
+            float factor;
+            if (ToTarget.Length() > 30f)
+                ToTarget = ToTarget / (ToTarget.Length() / (ToTarget.Length() - 30f));
+            else
+                ToTarget = new Vector2(0f,0f);
+
+            float dist = ToTarget.Length();
+
+            if (dist > 0.01)
+            {
+                const float declarationtweak = 8f;
+                float speed = dist / (declarationtweak);
+
+                if (speed > parent.MaxSpeed)
+                    speed = parent.MaxSpeed;
+
+                Vector2 Dersiredvelocity = ToTarget * speed / dist;
+
+                return (Dersiredvelocity - parent.Velocity);
+
+            }
+            return new Vector2(0f, 0f);
 
         }
 
