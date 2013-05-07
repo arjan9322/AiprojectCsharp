@@ -10,6 +10,7 @@ namespace AIproject
     {
         public abstract void Update(float time_elapsed);
         public abstract void Render();
+        public abstract Rectangle GetSourceRectangle();
         public int ID { get; set; }
         public Vector2 pos { get; set; }
         public Vector2 rotation { get; set; }
