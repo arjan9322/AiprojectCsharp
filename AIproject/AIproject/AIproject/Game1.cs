@@ -72,7 +72,7 @@ namespace AIproject
             spriteBatch = new SpriteBatch(GraphicsDevice);
             spriteCar   = new SpriteBatch(GraphicsDevice);
             Tile.TileSetTexture = Content.Load<Texture2D>("part2_tileset");
-            Vehicle.texture = Content.Load<Texture2D>("part2_tileset");
+            GameWorld.texture = Content.Load<Texture2D>("part2_tileset");
             // TODO: use this.Content to load your game content here
          }
 
@@ -188,13 +188,15 @@ namespace AIproject
 
             
             spriteCar.Begin();
-            spriteCar.Draw(Vehicle.texture, screenpos, world.gameobjects[1].GetSourceRectangle(), Color.White, RotationAngle2, cannonOrigin, 1.0f, SpriteEffects.None, 0f);
+            spriteCar.Draw(GameWorld.texture, screenpos, world.gameobjects[1].GetSourceRectangle(), Color.White, RotationAngle2, cannonOrigin, 1.0f, SpriteEffects.None, 0f);
 
-            for (int i = 0; i < 10; i++)
+            
+            foreach (BaseGameEntity entity in world.gameobjects)
             {
-                float angle = (float)Math.Atan2(world.gameobjects[i].rotation.Y, world.gameobjects[i].rotation.X);
-                spriteCar.Draw(Vehicle.texture, world.gameobjects[i].pos, world.gameobjects[i].GetSourceRectangle(), Color.White, angle, cannonOrigin, 1.0f, SpriteEffects.None, 0f);
+                 float angle = (float)Math.Atan2(entity.rotation.Y, entity.rotation.X);
+                 spriteCar.Draw(GameWorld.texture, entity.pos, entity.GetSourceRectangle(), Color.White, angle, cannonOrigin, 1.0f, SpriteEffects.None, 0f);
             }
+            
             spriteCar.End();
             // TODO: Add your drawing code here
             world.Render();

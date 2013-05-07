@@ -9,7 +9,6 @@ namespace AIproject
 {
     class Vehicle : MovingEntity
     {
-        static public Texture2D texture;
         static public Vector2 steeringForce;
 
         public static int tileIndex = 7;
@@ -22,8 +21,8 @@ namespace AIproject
 
         public override Rectangle GetSourceRectangle()
         {
-            int tileY = tileIndex / (texture.Width / TileWidth);
-            int tileX = tileIndex % (texture.Width / TileWidth);
+            int tileY = tileIndex / (576 / TileWidth);
+            int tileX = tileIndex % (576 / TileWidth);
 
             return new Rectangle(tileX * SpriteWidth, tileY * SpriteHeight, TileWidth, TileHeight);
         }

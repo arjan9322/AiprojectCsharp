@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 
 namespace AIproject
@@ -11,6 +12,7 @@ namespace AIproject
     {
         private static GameWorld instance;
         public List<BaseGameEntity> gameobjects;
+        static public Texture2D texture;
         
         private GameWorld()
         {
@@ -29,6 +31,10 @@ namespace AIproject
             vehicle.MaxSpeed = 10;
             gameobjects.Add(vehicle);
             }
+
+            gameobjects.Add(new StaticObject(200f, 200f));
+
+            
 
         }
 

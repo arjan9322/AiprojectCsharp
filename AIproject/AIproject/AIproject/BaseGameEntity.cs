@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-
+using Microsoft.Xna.Framework.Graphics;
 namespace AIproject
 {
     abstract class BaseGameEntity
@@ -16,6 +16,5 @@ namespace AIproject
         public Vector2 rotation { get; set; }
         public float scale { get; set; }
         public float Bradius { get; set; }
-        
     }
 }
