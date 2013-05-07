@@ -23,7 +23,7 @@ namespace AIproject
         int speed = 2;
         Vehicle playerVehicle = new Vehicle(new Vector2(5f,5f));
 
-        Vector2 cannonOrigin = new Vector2(5,5);
+        Vector2 cannonOrigin = new Vector2(24,24);
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteBatch spriteCar;

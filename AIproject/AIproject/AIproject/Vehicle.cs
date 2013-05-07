@@ -13,8 +13,8 @@ namespace AIproject
         static public Texture2D CarTexture;
         static public Vector2 steeringForce;
 
-        static public int TileWidth = 20;
-        static public int TileHeight = 20;
+        static public int TileWidth = 47;
+        static public int TileHeight = 47;
         static public int SpriteWidth = 48;
         static public int SpriteHeight = 48;
         public SteeringBehaviours steeringBehaviour;

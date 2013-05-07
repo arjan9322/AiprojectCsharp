@@ -23,10 +23,17 @@ namespace AIproject
                 MapRow thisRow = new MapRow();
                 for (int x = 0; x < MapWidth; x++)
                 {
-                    thisRow.Columns.Add(new MapCell(0));
+                    int variable = index(x, y);
+                    thisRow.Columns.Add(new MapCell(variable));
                 }
                 Rows.Add(thisRow);
-            }         
+            }
+            
+        }       
+
+        private int index(int x, int y)
+        {
+            return 0;
         }
     }
 }
