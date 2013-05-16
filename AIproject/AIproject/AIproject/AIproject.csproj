@@ -107,6 +107,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI pathfinding\Edge.cs" />
+    <Compile Include="AI pathfinding\Graph.cs" />
+    <Compile Include="AI pathfinding\Node.cs" />
+    <Compile Include="AI pathfinding\PathFinder.cs" />
     <Compile Include="BaseGameEntity.cs" />
     <Compile Include="GameWorld.cs" />
     <Compile Include="MovingEntity.cs" />

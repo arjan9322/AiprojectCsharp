@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AIproject
 {
-    class MapCell
+    public class MapCell
     {
         public List<int> BaseTiles = new List<int>();
 

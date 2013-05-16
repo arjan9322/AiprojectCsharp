@@ -36,11 +36,23 @@ namespace AIproject
         float RotationAngle;
         float RotationAngle2;
         Vector2 screenpos;
+       
+        Texture2D hokje;
+        Texture2D hokjevol;
+
+
+        public Graph graph;
+        PathFinder pathfinder;
+
+        
+
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            graph = new Graph();
+            pathfinder = new PathFinder(this);
             
         }
 
@@ -58,6 +70,9 @@ namespace AIproject
             RotationAngle = 0;
             RotationAngle2 = RotationAngle / 180;
             RotationAngle2 = RotationAngle2 * circle;
+            Vector2 pointto = new Vector2(400, 400);
+            graph.fill(myMap, pointto);
+            List<Vector2> path = pathfinder.FindPath(new Point(0, 0), new Point(9, 9));
             base.Initialize();
         }
 
@@ -74,6 +89,8 @@ namespace AIproject
             Tile.TileSetTexture = Content.Load<Texture2D>("part2_tileset");
             Vehicle.CarTexture = Content.Load<Texture2D>("part2_tileset");
             StaticObject.ObjectTexture = Content.Load<Texture2D>("part2_tileset");
+            hokje = Content.Load<Texture2D>("hokje");
+            hokjevol = Content.Load<Texture2D>("hokjevol");
             // TODO: use this.Content to load your game content here
          }
 
@@ -173,6 +190,7 @@ namespace AIproject
             int offsetX = (int)squareOffset.X;
             int offsetY = (int)squareOffset.Y;
 
+            
             for (int y = 0; y < squaresDown; y++)
             {
                 for (int x = 0; x < squaresAcross; x++)
@@ -180,6 +198,13 @@ namespace AIproject
                     foreach (int tileID in myMap.Rows[y + firstY].Columns[x + firstX].BaseTiles)
                     {
                         spriteBatch.Draw(Tile.TileSetTexture,new Rectangle((x * Tile.TileWidth) - offsetX, (y * Tile.TileHeight) - offsetY, Tile.TileWidth, Tile.TileHeight), Tile.GetSourceRectangle(tileID),Color.White);
+                        Vector2 position = new Vector2(x * Tile.TileWidth, y * Tile.TileHeight);
+                        if (graph.closed(x, y))
+                        {
+                            spriteBatch.Draw(hokje, position, Color.White);
+                        }
+                        else
+                            spriteBatch.Draw(hokjevol, position, Color.White);
                     }
                 }
             }

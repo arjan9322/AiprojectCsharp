@@ -5,12 +5,12 @@ using System.Text;
 
 namespace AIproject
 {
-    class MapRow
+    public class MapRow
     {
         public List<MapCell> Columns = new List<MapCell>();
     }
 
-    class TileMap
+    public class TileMap
     {
         public List<MapRow> Rows = new List<MapRow>();
         public int MapWidth = 50;
@@ -33,7 +33,12 @@ namespace AIproject
 
         private int index(int x, int y)
         {
-            return 0;
+            if (x == 2 && (y < 5))
+            {
+                return 5;
+            }
+            else
+                return 1;
         }
     }
 }
