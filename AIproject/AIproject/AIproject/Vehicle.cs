@@ -9,9 +9,9 @@ namespace AIproject
 {
     class Vehicle : MovingEntity
     {
-        
-        static public Texture2D CarTexture;
         static public Vector2 steeringForce;
+
+        public static int tileIndex = 7;
 
         static public int TileWidth = 47;
         static public int TileHeight = 47;
@@ -19,16 +19,13 @@ namespace AIproject
         static public int SpriteHeight = 48;
         public SteeringBehaviours steeringBehaviour;
 
-        //GameWorld world;
-  
-        static public Rectangle GetSourceRectangle(int tileIndex)
+        public override Rectangle GetSourceRectangle()
         {
-            int tileY = tileIndex / (CarTexture.Width / TileWidth);
-            int tileX = tileIndex % (CarTexture.Width / TileWidth);
+            int tileY = tileIndex / (576 / TileWidth);
+            int tileX = tileIndex % (576 / TileWidth);
 
             return new Rectangle(tileX * SpriteWidth, tileY * SpriteHeight, TileWidth, TileHeight);
         }
-
 
         public Vehicle(Vector2 startingPos)
         {
@@ -38,10 +35,9 @@ namespace AIproject
             //world = GameWorld.GetInstance();
         }
 
-        public override void Render()
-        {
-            
+        public override void Render(){
         }
+
         public override void Update(float time_elapsed)
         {
             // create steering force dependent on steeringbehaviours
@@ -57,8 +53,6 @@ namespace AIproject
             pos += Velocity * time_elapsed;
 
             //do update heading here
-
         }
-
     }
 }

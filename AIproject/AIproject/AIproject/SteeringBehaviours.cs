@@ -7,21 +7,38 @@ using Microsoft.Xna.Framework;
 namespace AIproject
 {
     enum Dec{ slow = 3, normal = 2, fast = 1 };
-    class SteeringBehaviours
-    {
-        
-        bool SeekBehaviour;
-        bool FleeBehaviour;
-        bool ArriveBehaviour;
-        public Vector2 Target;
 
-        Vehicle parent;
+    internal class SteeringBehaviours
+    {
+        private bool SeekBehaviour;
+        private bool FleeBehaviour;
+        private bool ArriveBehaviour;
+        private bool ExploreBehaviour;
+        private List<Vector2> exploreTargets;
+        private int exploretargetnumber = 0;
+        public Vector2 Target;
+        private Vehicle parent;
         public SteeringBehaviours(Vehicle parent)
         {
             SeekBehaviour = false;
             FleeBehaviour = false;
             ArriveBehaviour = false;
+            ExploreBehaviour = false;
             this.parent = parent;
+
+            exploreTargets = new List<Vector2>();
+            exploreTargets.Add(new Vector2(100f,100f));
+            exploreTargets.Add(new Vector2(1100f,100f));
+            exploreTargets.Add(new Vector2(1100f,200f));
+            exploreTargets.Add(new Vector2(100f,200f));
+            exploreTargets.Add(new Vector2(100f,300f));
+            exploreTargets.Add(new Vector2(1100f,300f));
+            exploreTargets.Add(new Vector2(1100f,400f));
+            exploreTargets.Add(new Vector2(100f,400f));
+            exploreTargets.Add(new Vector2(100f,500f));
+            exploreTargets.Add(new Vector2(1100f,500f));
+            exploreTargets.Add(new Vector2(1100f,600f));
+            exploreTargets.Add(new Vector2(100f,600f));
         }
 
         private Vector2 Seek()
@@ -87,6 +104,24 @@ namespace AIproject
             return new Vector2(0f, 0f);
         }
 
+        private Vector2 Explore()
+        {
+
+            Vector2 ToTarget = exploreTargets[exploretargetnumber] - parent.pos;
+            
+            float dist = ToTarget.Length();
+
+            if (dist < 10f)
+            {
+                exploretargetnumber++;
+                if (exploretargetnumber >= exploreTargets.Count)
+                    exploretargetnumber = 0;
+            }
+            Vector2 speed = new Vector2(parent.MaxSpeed);
+            Vector2 Dersiredvelocity = ToTarget * speed / dist;
+            return (Dersiredvelocity - parent.Velocity);
+        }
+
         public Vector2 Calculate()
         {
             Vector2 steeringForce = new Vector2();
@@ -100,38 +135,33 @@ namespace AIproject
             if (ArriveBehaviour == true)
                 steeringForce += Arrive();
 
+            if (ExploreBehaviour == true)
+                steeringForce += Explore();
+
             steeringForce = VectorHelper.MaxLimit(steeringForce, parent.MaxForce);
             return steeringForce;
         }
 
-        public Vector2 ForwardComponent()
-        {
+        public Vector2 ForwardComponent(){
             return new Vector2();
         }
 
-        public Vector2 SideComponent()
-        {
+        public Vector2 SideComponent(){
             return new Vector2();
         }
 
-        public void SetPath()
-        {
+        public void SetPath(){
 
         }
 
-        public void SetTarget(Vector2 target)
-        {
+        public void SetTarget(Vector2 target){
             Target = target;
         }
 
-        public void SetTargetAgent1(Vehicle agent1)
-        {
-
+        public void SetTargetAgent1(Vehicle agent1){
         }
 
-        public void SetTargetAgent2(Vehicle agent2)
-        {
-
+        public void SetTargetAgent2(Vehicle agent2){
         }
 
         public void SeekOn(){
@@ -146,6 +176,10 @@ namespace AIproject
             ArriveBehaviour = true;
         }
 
+        public void ExploreOn(){
+            ExploreBehaviour = true;
+        }
+
         public void SeekOff(){
             SeekBehaviour = false;
         }
@@ -156,6 +190,10 @@ namespace AIproject
 
         public void ArriveOff(){
             ArriveBehaviour = false;
+        }
+
+        public void ExploreOff(){
+            ExploreBehaviour = false;
         }
     }
 }

@@ -5,25 +5,19 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-
 namespace AIproject
 {
     class StaticObject : BaseGameEntity
     {
-        static public Texture2D ObjectTexture;
+        public static int tileIndex = 98;
+        
 
-        static public int TileWidth = 48;
-        static public int TileHeight = 48;
+        static public int TileWidth = 47;
+        static public int TileHeight = 47;
+        static public int SpriteWidth = 48;
+        static public int SpriteHeight = 48;
 
-        static public Rectangle GetSourceRectangle(int tileIndex)
-        {
-            int tileY = tileIndex / (ObjectTexture.Width / TileWidth);
-            int tileX = tileIndex % (ObjectTexture.Width / TileWidth);
-
-            return new Rectangle(tileX * TileWidth, tileY * TileHeight, TileWidth, TileHeight);
-        }
-
-        StaticObject(float _x, float _y){
+        public StaticObject(float _x, float _y){
             pos = new Vector2(_x, _y);
         }
 
@@ -32,9 +26,15 @@ namespace AIproject
             
         }
 
-        public override void Update(float time_elapsed)
+        public override void Update(float time_elapsed){
+        }
+
+        public override Rectangle GetSourceRectangle()
         {
-            throw new NotImplementedException();
+            int tileY = tileIndex / (576 / TileWidth);
+            int tileX = tileIndex % (576 / TileWidth);
+
+            return new Rectangle(tileX * SpriteWidth, tileY * SpriteHeight, TileWidth, TileHeight);
         }
     }
 }

@@ -11,8 +11,8 @@ namespace AIproject
         private Game1 game;
         private List<Node> openList = new List<Node>();
         private List<Node> closedList = new List<Node>();
-        int levelwidth = 18;
-        int levelheight = 11;
+        int levelwidth = 30;
+        int levelheight = 20;
 
         public PathFinder(Game1 _game)
         {

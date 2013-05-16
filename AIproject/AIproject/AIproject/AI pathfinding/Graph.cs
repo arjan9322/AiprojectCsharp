@@ -11,8 +11,8 @@ namespace AIproject
     {
         public List<Node> nodes;
        
-        int levelwidth = 18;
-        int levelheight = 11;
+        int levelwidth = 30;
+        int levelheight = 20;
 
         public Graph()
         {

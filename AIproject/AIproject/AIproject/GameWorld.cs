@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-
+using Microsoft.Xna.Framework.Graphics;
 
 namespace AIproject
 {
@@ -11,13 +11,13 @@ namespace AIproject
     {
         private static GameWorld instance;
         public List<BaseGameEntity> gameobjects;
+        static public Texture2D texture;
         
         private GameWorld()
         {
             gameobjects = new List<BaseGameEntity>();
-            //*TEST* 1 vehicle
             Random rnd = new Random();
-
+            
             for (int i = 0; i < 10; i++)
             {
 
@@ -26,9 +26,17 @@ namespace AIproject
             vehicle.steeringBehaviour.SetTarget(new Vector2(400f, 300f));
             vehicle.Mass = 2;
             vehicle.MaxForce = 5;
-            vehicle.MaxSpeed = 10;
+            vehicle.MaxSpeed = 20;
             gameobjects.Add(vehicle);
             }
+
+            Vehicle vehicle1 = new Vehicle(new Vector2(rnd.Next(20, 80), rnd.Next(20, 80)));
+            vehicle1.steeringBehaviour.ExploreOn();
+            vehicle1.Mass = 2;
+            vehicle1.MaxForce = 5;
+            vehicle1.MaxSpeed = 20;
+            gameobjects.Add(vehicle1);
+            
 
         }
 
