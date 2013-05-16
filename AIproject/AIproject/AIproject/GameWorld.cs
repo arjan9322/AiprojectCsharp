@@ -17,7 +17,7 @@ namespace AIproject
         {
             gameobjects = new List<BaseGameEntity>();
             Random rnd = new Random();
-
+            
             for (int i = 0; i < 10; i++)
             {
 
@@ -30,8 +30,12 @@ namespace AIproject
             gameobjects.Add(vehicle);
             }
 
-            gameobjects.Add(new StaticObject(200f, 200f));
-
+            Vehicle vehicle1 = new Vehicle(new Vector2(rnd.Next(20, 80), rnd.Next(20, 80)));
+            vehicle1.steeringBehaviour.ExploreOn();
+            vehicle1.Mass = 2;
+            vehicle1.MaxForce = 5;
+            vehicle1.MaxSpeed = 20;
+            gameobjects.Add(vehicle1);
             
 
         }

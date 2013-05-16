@@ -27,6 +27,7 @@ namespace AIproject
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteBatch spriteCar;
+        Texture2D pixel;
         float circle = MathHelper.Pi;
 
         TileMap myMap = new TileMap();
@@ -44,7 +45,6 @@ namespace AIproject
             graphics.PreferredBackBufferWidth = 1300;
             graphics.ApplyChanges();
             Content.RootDirectory = "Content";
-            
         }
 
         /// <summary>
@@ -74,6 +74,8 @@ namespace AIproject
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             spriteCar   = new SpriteBatch(GraphicsDevice);
+            pixel = new Texture2D(GraphicsDevice,1,1,false,SurfaceFormat.Color);
+            pixel.SetData(new[] {Color.White});
             Tile.TileSetTexture = Content.Load<Texture2D>("part2_tileset");
             GameWorld.texture = Content.Load<Texture2D>("part2_tileset");
             // TODO: use this.Content to load your game content here
@@ -193,7 +195,7 @@ namespace AIproject
             spriteCar.Begin();
             spriteCar.Draw(GameWorld.texture, screenpos, world.gameobjects[1].GetSourceRectangle(), Color.White, RotationAngle2, cannonOrigin, 1.0f, SpriteEffects.None, 0f);
 
-            
+
             foreach (BaseGameEntity entity in world.gameobjects)
             {
                  float angle = (float)Math.Atan2(entity.rotation.Y, entity.rotation.X);
