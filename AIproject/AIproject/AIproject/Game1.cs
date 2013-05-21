@@ -43,7 +43,7 @@ namespace AIproject
 
 
         public Graph graph;
-        PathFinder pathfinder;
+        public PathFinder pathfinder;
 
         
 
@@ -65,8 +65,7 @@ namespace AIproject
         /// related content.  Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
-        protected override void Initialize()
-        {
+        protected override void Initialize(){
             // TODO: Add your initialization logic here
             screenpos.X = 50;
             screenpos.Y = 50;
@@ -84,8 +83,7 @@ namespace AIproject
         /// all of your content.
         /// </summary>
        
-        protected override void LoadContent()
-        {
+        protected override void LoadContent(){
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             spriteCar   = new SpriteBatch(GraphicsDevice);
@@ -103,8 +101,7 @@ namespace AIproject
         /// UnloadContent will be called once per game and is the place to unload
         /// all content.
         /// </summary>
-        protected override void UnloadContent()
-        {
+        protected override void UnloadContent(){
             // TODO: Unload any non ContentManager content here
         }
 
@@ -116,7 +113,6 @@ namespace AIproject
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-
             KeyboardState ks = Keyboard.GetState();
             //exit game by pressing the escape button
             if (ks.IsKeyDown(Keys.Escape))
@@ -227,7 +223,12 @@ namespace AIproject
                  float angle = (float)Math.Atan2(entity.rotation.Y, entity.rotation.X);
                  spriteCar.Draw(GameWorld.texture, entity.pos, entity.GetSourceRectangle(), Color.White, angle, cannonOrigin, 1.0f, SpriteEffects.None, 0f);
             }
-            
+
+            foreach (PowerUp powerUp in world.PowerUps)
+            {
+                spriteCar.Draw(GameWorld.texture, powerUp.pos, powerUp.GetSourceRectangle(), Color.White, 0, cannonOrigin, 1.0f, SpriteEffects.None, 0f);
+            }
+
             spriteCar.End();
             // TODO: Add your drawing code here
             world.Render();

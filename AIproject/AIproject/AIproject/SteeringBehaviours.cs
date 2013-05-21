@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AIproject.Goals;
 using Microsoft.Xna.Framework;
 
 namespace AIproject
@@ -14,6 +15,8 @@ namespace AIproject
         private bool FleeBehaviour;
         private bool ArriveBehaviour;
         private bool ExploreBehaviour;
+        private bool GoalDrivenBehaviour;
+        private Think think;
         private List<Vector2> exploreTargets;
         private int exploretargetnumber = 0;
         public Vector2 Target;
@@ -24,7 +27,9 @@ namespace AIproject
             FleeBehaviour = false;
             ArriveBehaviour = false;
             ExploreBehaviour = false;
+            GoalDrivenBehaviour = false;
             this.parent = parent;
+            think = new Think(parent);
 
             exploreTargets = new List<Vector2>();
             exploreTargets.Add(new Vector2(100f,100f));
@@ -125,6 +130,9 @@ namespace AIproject
         {
             Vector2 steeringForce = new Vector2();
 
+            if (GoalDrivenBehaviour == true)
+                think.Update();
+
             if (SeekBehaviour == true)
                 steeringForce += Seek();
 
@@ -150,7 +158,6 @@ namespace AIproject
         }
 
         public void SetPath(){
-
         }
 
         public void SetTarget(Vector2 target){
@@ -179,6 +186,10 @@ namespace AIproject
             ExploreBehaviour = true;
         }
 
+        public void GoalDrivenBehaviourOn(){
+            GoalDrivenBehaviour = true;
+        }
+
         public void SeekOff(){
             SeekBehaviour = false;
         }
@@ -193,6 +204,10 @@ namespace AIproject
 
         public void ExploreOff(){
             ExploreBehaviour = false;
+        }
+
+        public void GoalDrivenBehaviourOff(){
+            GoalDrivenBehaviour = false;
         }
     }
 }

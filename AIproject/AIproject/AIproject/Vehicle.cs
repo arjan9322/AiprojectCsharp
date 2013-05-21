@@ -19,30 +19,26 @@ namespace AIproject
         public SteeringBehaviours steeringBehaviour;
         public int fuel { get; set; }
         public int hull { get; set; }
+        public Game1 game { get; set; }
 
-        public override Rectangle GetSourceRectangle()
-        {
+        public override Rectangle GetSourceRectangle(){
             int tileY = tileIndex / (576 / TileWidth);
             int tileX = tileIndex % (576 / TileWidth);
-
             return new Rectangle(tileX * SpriteWidth, tileY * SpriteHeight, TileWidth, TileHeight);
         }
 
-        public Vehicle(Vector2 startingPos)
-        {
+        public Vehicle(Vector2 startingPos){
             fuel = 500;
             hull = 500;
             pos = startingPos;
             Velocity = new Vector2();
             steeringBehaviour = new SteeringBehaviours(this);
-            //world = GameWorld.GetInstance();
         }
 
         public override void Render(){
         }
 
-        public override void Update(float time_elapsed)
-        {
+        public override void Update(float time_elapsed){
             // create steering force dependent on steeringbehaviours
             steeringForce = steeringBehaviour.Calculate();
             rotation = steeringForce;

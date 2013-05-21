@@ -11,11 +11,13 @@ namespace AIproject
     {
         private static GameWorld instance;
         public List<BaseGameEntity> gameobjects;
+        public List<PowerUp> PowerUps; 
         static public Texture2D texture;
         
         private GameWorld()
         {
             gameobjects = new List<BaseGameEntity>();
+            PowerUps = new List<PowerUp>();
             Random rnd = new Random();
             
             for (int i = 0; i < 10; i++)
@@ -37,6 +39,14 @@ namespace AIproject
             vehicle1.MaxSpeed = 20;
             gameobjects.Add(vehicle1);
             
+            for (int i = 0; i < 3; i++)
+            {
+                PowerUps.Add(new PowerUp(PowerUp.PowerUpType.Fuel));
+                PowerUps.Add(new PowerUp(PowerUp.PowerUpType.Points));
+                PowerUps.Add(new PowerUp(PowerUp.PowerUpType.Repair));
+            }
+
+
 
         }
 

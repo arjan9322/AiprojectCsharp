@@ -16,7 +16,6 @@ namespace AIproject.Goals
         public Think(Vehicle _parent)
         {
             parent = _parent;
-            Goal = new GetPoints(parent);
         }
 
         public void Update(){
