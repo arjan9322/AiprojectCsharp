@@ -5,18 +5,17 @@ using System.Text;
 
 namespace AIproject.Goals
 {
-    class GetFuel : Goal // find and follow route to closest fuel
+    class GetPoints : Goal // find and follow route to closest points
     {
         private Vehicle parent;
 
-        public GetFuel(Vehicle _parent)
+        public GetPoints(Vehicle _parent)
         {
             parent = _parent;
         }
-
         public override void Update()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

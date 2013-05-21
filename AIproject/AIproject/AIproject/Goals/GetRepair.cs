@@ -5,11 +5,11 @@ using System.Text;
 
 namespace AIproject.Goals
 {
-    class GetFuel : Goal // find and follow route to closest fuel
+    class GetRepair : Goal // find and follow route to closest repair
     {
         private Vehicle parent;
 
-        public GetFuel(Vehicle _parent)
+        public GetRepair(Vehicle _parent)
         {
             parent = _parent;
         }

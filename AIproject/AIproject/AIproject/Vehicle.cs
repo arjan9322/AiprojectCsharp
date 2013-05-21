@@ -10,7 +10,6 @@ namespace AIproject
     class Vehicle : MovingEntity
     {
         static public Vector2 steeringForce;
-
         public static int tileIndex = 7;
 
         static public int TileWidth = 47;
@@ -18,6 +17,8 @@ namespace AIproject
         static public int SpriteWidth = 48;
         static public int SpriteHeight = 48;
         public SteeringBehaviours steeringBehaviour;
+        public int fuel { get; set; }
+        public int hull { get; set; }
 
         public override Rectangle GetSourceRectangle()
         {
@@ -29,6 +30,8 @@ namespace AIproject
 
         public Vehicle(Vector2 startingPos)
         {
+            fuel = 500;
+            hull = 500;
             pos = startingPos;
             Velocity = new Vector2();
             steeringBehaviour = new SteeringBehaviours(this);

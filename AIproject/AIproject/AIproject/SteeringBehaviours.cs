@@ -57,7 +57,6 @@ namespace AIproject
         private Vector2 Flee()
         {
             Vector2 ToTarget = Target - parent.pos;
-            float factor;
             if (ToTarget.Length() > 30f)
                 ToTarget = ToTarget / (ToTarget.Length() / (ToTarget.Length() - 30f));
             else
